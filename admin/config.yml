@@ -1,9 +1,9 @@
 backend:
   name: github
-  repo: nonoshiino/nonoshiino.github.io   # ご自身のリポジトリ名に合わせて変更してください
+  repo: toaogawa/toaogawa.github.io   # ご自身のリポジトリ名に合わせて変更してください
   branch: main
   # 認証用Cloudflare Worker(GitHub OAuthプロキシ)のURL
-  base_url: https://nonoshiino-cms-auth.nonono-rain22.workers.dev
+  base_url: https://toaogawa-cms-auth.nonono-rain22.workers.dev
   auth_endpoint: auth
 
 # 画像をアップロードしたときの保存先フォルダと、サイト上での参照パス
