@@ -1,0 +1,67 @@
+{
+  "items": [
+    {
+      "id": "releases-01",
+      "title": "転がるくせ",
+      "artist": "ナースロボ＿タイプT、転音セラ",
+      "thumbnail": "assets/original/jacket/転がるくせジャケット.png",
+      "link": "https://big-up.style/Foe6wALhZS",
+      "category": "releases",
+      "date": "2025-10-10"
+    },
+    {
+      "id": "releases-02",
+      "title": "ブラックボックス！",
+      "artist": "重音テト、ナースロボ＿タイプT",
+      "thumbnail": "assets/original/jacket/ブラックボックス！ジャケット.png",
+      "link": "https://big-up.style/oABzXyO9Ji",
+      "category": "releases",
+      "date": "2025-11-11"
+    },
+    {
+      "id": "releases-03",
+      "title": "ホワイトスペースにおいで",
+      "artist": "ナースロボ＿タイプT、重音テト",
+      "thumbnail": "assets/original/jacket/ホワイトスペースにおいでジャケット.png",
+      "link": "https://big-up.style/1XjSLEWe87",
+      "category": "releases",
+      "date": "2025-12-13"
+    },
+    {
+      "id": "releases-04",
+      "title": "なりますように！",
+      "artist": "70D",
+      "thumbnail": "assets/original/jacket/なりますように！ジャケット.png",
+      "link": "https://big-up.style/zBjMrYcRIk",
+      "category": "releases",
+      "date": "2026-02-26"
+    },
+    {
+      "id": "releases-05",
+      "title": "不こうにしちゃう",
+      "artist": "donor.",
+      "thumbnail": "assets/original/jacket/不こうにしちゃうジャケット.jpeg",
+      "link": "https://big-up.style/osqhAuFWOH",
+      "category": "releases",
+      "date": "2026-03-22"
+    },
+    {
+      "id": "releases-06",
+      "title": "mosaique",
+      "artist": "カゼヒキ、ナースロボ＿タイプT",
+      "thumbnail": "assets/original/jacket/mosaiqueジャケット.png",
+      "link": "https://big-up.style/MR0xenrYVt",
+      "category": "releases",
+      "date": "2026-06-24"
+    },
+    {
+      "id": "releases-07",
+      "title": "むすんで、ひらいて",
+      "artist": "ボカロPx歌い手7組によるコンピレーションアルバム",
+      "thumbnail": "assets/original/jacket/むすんで、ひらいてジャケット.jpg",
+      "link": "https://euhi2525.booth.pm/items/8273782",
+      "category": "releases",
+      "date": "2026-04-26"
+    }
+  ]
+}

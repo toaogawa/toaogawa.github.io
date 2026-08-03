@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コンテンツ管理</title>
+</head>
+<body>
+  <!-- Decap CMS本体を読み込みます。ここは基本的に変更不要です -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <!-- 本文エディタに「文字を大きく」「文字を小さく」「ピンク文字」ボタンを追加します -->
+  <script>
+    CMS.registerEditorComponent({
+      id: 'large-text',
+      label: '大文字',
+      fields: [{ name: 'body', label: '文字', widget: 'string' }],
+      pattern: /^\{large\}([\s\S]*?)\{\/large\}$/,
+      fromBlock: match => ({ body: match[1] }),
+      toBlock: data => `{large}${data.body}{/large}`,
+      toPreview: data => `<span style="font-size:2.7em;">${data.body}</span>`,
+    });
+    CMS.registerEditorComponent({
+      id: 'small-text',
+      label: '小文字',
+      fields: [{ name: 'body', label: '文字', widget: 'string' }],
+      pattern: /^\{small\}([\s\S]*?)\{\/small\}$/,
+      fromBlock: match => ({ body: match[1] }),
+      toBlock: data => `{small}${data.body}{/small}`,
+      toPreview: data => `<span style="font-size:0.8em;">${data.body}</span>`,
+    });
+    CMS.registerEditorComponent({
+      id: 'pink-text',
+      label: 'ピンク',
+      fields: [{ name: 'body', label: '文字', widget: 'string' }],
+      pattern: /^\{pink\}([\s\S]*?)\{\/pink\}$/,
+      fromBlock: match => ({ body: match[1] }),
+      toBlock: data => `{pink}${data.body}{/pink}`,
+      toPreview: data => `<span style="color:#EE7C88;">${data.body}</span>`,
+    });
+    // Image(大)・Image(小)（アップロード先は今まで通りassets/uploadsに統一）
+    CMS.registerEditorComponent({
+      id: 'single-image',
+      label: 'Image(大)',
+      fields: [
+        { name: 'src', label: '画像・動画(mp4)', widget: 'file' },
+        { name: 'text', label: '説明書き', widget: 'string', required: false },
+      ],
+      pattern: /^\{fullimg src="([^"]*)"(?:\s+text="([^"]*)")?\}$/,
+      fromBlock: match => ({ src: match[1], text: match[2] || '' }),
+      toBlock: data => `{fullimg src="${data.src || ''}"${data.text ? ` text="${data.text}"` : ''}}`,
+      toPreview: data => `${/\.mp4($|\?)/i.test(data.src || '') ? `<video src="${data.src}" controls style="width:100%;"></video>` : `<img src="${data.src}" style="width:100%;" />`}${data.text ? `<div style="font-size:12px;color:#999;">${data.text}</div>` : ''}`,
+    });
+    CMS.registerEditorComponent({
+      id: 'image',
+      label: 'Image(小)',
+      fields: [
+        { name: 'src', label: '画像・動画(mp4)', widget: 'file' },
+        { name: 'text', label: '説明書き', widget: 'string', required: false },
+      ],
+      pattern: /^\{img src="([^"]*)"(?:\s+text="([^"]*)")?\}$/,
+      fromBlock: match => ({ src: match[1], text: match[2] || '' }),
+      toBlock: data => `{img src="${data.src || ''}"${data.text ? ` text="${data.text}"` : ''}}`,
+      toPreview: data => `${/\.mp4($|\?)/i.test(data.src || '') ? `<video src="${data.src}" controls style="max-width:100%;"></video>` : `<img src="${data.src}" style="max-width:100%;" />`}${data.text ? `<div style="font-size:12px;color:#999;">${data.text}</div>` : ''}`,
+    });
+  </script>
+
+  <!-- 「公開」を押したときに、同じファイル内でIDが重複していないかチェックする -->
+  <script>
+    function checkDuplicateIds(entry){
+      const items = entry.getIn(['data', 'items']);
+      if(!items) return;
+      const seen = new Set();
+      const duplicates = new Set();
+      items.forEach(item => {
+        const id = item.get('id');
+        if(!id) return;
+        if(seen.has(id)) duplicates.add(id);
+        seen.add(id);
+      });
+      if(duplicates.size > 0){
+        throw new Error(`IDが重複しています: ${[...duplicates].join('、')}。IDはそれぞれ別の値にしてください。`);
+      }
+    }
+
+    CMS.registerEventListener({
+      name: 'prePublish',
+      handler: ({ entry }) => checkDuplicateIds(entry),
+    });
+    CMS.registerEventListener({
+      name: 'preSave',
+      handler: ({ entry }) => checkDuplicateIds(entry),
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+backend:
+  name: github
+  repo: nonoshiino/nonoshiino.github.io   # ご自身のリポジトリ名に合わせて変更してください
+  branch: main
+  # 認証用Cloudflare Worker(GitHub OAuthプロキシ)のURL
+  base_url: https://nonoshiino-cms-auth.nonono-rain22.workers.dev
+  auth_endpoint: auth
+
+# 画像をアップロードしたときの保存先フォルダと、サイト上での参照パス
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# 管理画面の言語を日本語にする
+locale: "ja"
+
+collections:
+
+  # ===== ORIGINAL - MV =====
+  - name: "mv"
+    label: "Original / MV"
+    files:
+      - name: "mv_list"
+        label: "MV一覧"
+        file: "data/mv.json"
+        fields:
+          - label: "MV項目"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string" }
+              - { label: "カテゴリ", name: "category", widget: "string", default: "mv" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "アーティスト", name: "artist", widget: "string" }
+              - { label: "YouTube ID", name: "youtubeId", widget: "string", required: false, hint: "動画URLの v= のあとの11文字" }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - label: "本文(詳細ページに表示)"
+                name: "body"
+                widget: "markdown"
+                required: false
+                modes: ["rich_text"]
+                buttons: ["bold", "heading-two", "heading-three", "link"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+
+  # ===== ORIGINAL - RELEASES =====
+  - name: "original-releases"
+    label: "Original / Releases"
+    files:
+      - name: "releases_list"
+        label: "Releases一覧"
+        file: "data/releases.json"
+        fields:
+          - label: "項目"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string" }
+              - { label: "カテゴリ", name: "category", widget: "string", default: "releases" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "アーティスト", name: "artist", widget: "string" }
+              - { label: "画像", name: "thumbnail", widget: "image" }
+              - { label: "リンク(画像を押したときの飛び先)", name: "link", widget: "string" }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+
+  # ===== ORIGINAL - DESIGN =====
+  - name: "original-design"
+    label: "Original / Design"
+    files:
+      - name: "design_list"
+        label: "Design一覧"
+        file: "data/design.json"
+        fields:
+          - label: "項目"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string" }
+              - { label: "カテゴリ", name: "category", widget: "string", default: "design" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "説明", name: "artist", widget: "string" }
+              - { label: "画像", name: "thumbnail", widget: "image" }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+
+  # ===== ORIGINAL - OTHERS =====
+  - name: "original-others"
+    label: "Original / Others"
+    files:
+      - name: "others_list"
+        label: "Others一覧"
+        file: "data/others.json"
+        fields:
+          - label: "項目"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string" }
+              - { label: "カテゴリ", name: "category", widget: "string", default: "others" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "アーティスト", name: "artist", widget: "string" }
+              - { label: "YouTube ID", name: "youtubeId", widget: "string", required: false, hint: "動画URLの v= のあとの11文字。YouTubeに上げていない場合は空欄にして、下のサムネイル欄を使ってください" }
+              - { label: "サムネイル(画像・GIF・動画mp4)", name: "thumbnail", widget: "file", required: false, hint: "YouTube IDが空欄のときに使われます。jpg/png/gif/mp4に対応しています" }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - label: "本文(詳細ページに表示)"
+                name: "body"
+                widget: "markdown"
+                required: false
+                modes: ["rich_text"]
+                buttons: ["bold", "heading-two", "heading-three", "link"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+
+  # ===== WORKS - MOVIE(video) =====
+  - name: "works-movie"
+    label: "Works / Movie"
+    files:
+      - name: "works_video_list"
+        label: "Movie一覧"
+        file: "data/works-video.json"
+        fields:
+          - label: "項目"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string" }
+              - { label: "カテゴリ", name: "category", widget: "string", default: "video", hint: "通常はvideoのままでOKです" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "ひとこと説明(一覧用)", name: "desc", widget: "string" }
+              - { label: "YouTube ID", name: "youtubeId", widget: "string", required: false }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - { label: "サムネイル画像のパス", name: "thumbnail", widget: "string", required: false }
+              - label: "本文(詳細ページに表示)"
+                name: "detail"
+                widget: "markdown"
+                required: false
+                modes: ["rich_text"]
+                buttons: ["bold", "heading-two", "heading-three", "link"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+
+  # ===== WORKS - MUSIC =====
+  - name: "works-music"
+    label: "Works / Music"
+    files:
+      - name: "works_music_list"
+        label: "Music一覧"
+        file: "data/works-music.json"
+        fields:
+          - label: "項目"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string" }
+              - { label: "カテゴリ", name: "category", widget: "string", default: "music", hint: "通常はmusicのままでOKです" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "ひとこと説明(一覧用)", name: "desc", widget: "string" }
+              - { label: "YouTube ID", name: "youtubeId", widget: "string", required: false }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - { label: "サムネイル画像のパス", name: "thumbnail", widget: "string", required: false }
+              - label: "本文(詳細ページに表示)"
+                name: "detail"
+                widget: "markdown"
+                required: false
+                modes: ["rich_text"]
+                buttons: ["bold", "heading-two", "heading-three", "link"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+
+  # ===== WORKS - DESIGN =====
+  - name: "works-design"
+    label: "Works / Design"
+    files:
+      - name: "works_design_list"
+        label: "Design一覧"
+        file: "data/works-design.json"
+        fields:
+          - label: "項目"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string" }
+              - { label: "カテゴリ", name: "category", widget: "string", default: "design", hint: "通常はdesignのままでOKです" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "ひとこと説明(一覧用)", name: "desc", widget: "string" }
+              - { label: "YouTube ID", name: "youtubeId", widget: "string", required: false }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - { label: "サムネイル画像のパス", name: "thumbnail", widget: "string", required: false }
+              - label: "本文(詳細ページに表示)"
+                name: "detail"
+                widget: "markdown"
+                required: false
+                modes: ["rich_text"]
+                buttons: ["bold", "heading-two", "heading-three", "link"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+
+  # ===== WORKS - OTHERS =====
+  - name: "works-others"
+    label: "Works / Others"
+    files:
+      - name: "works_others_list"
+        label: "Others一覧"
+        file: "data/works-others.json"
+        fields:
+          - label: "項目"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string" }
+              - { label: "カテゴリ", name: "category", widget: "string", default: "others", hint: "通常はothersのままでOKです" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "ひとこと説明(一覧用)", name: "desc", widget: "string" }
+              - { label: "YouTube ID", name: "youtubeId", widget: "string", required: false }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - { label: "サムネイル画像のパス", name: "thumbnail", widget: "string", required: false }
+              - label: "本文(詳細ページに表示)"
+                name: "detail"
+                widget: "markdown"
+                required: false
+                modes: ["rich_text"]
+                buttons: ["bold", "heading-two", "heading-three", "link"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+
+  # ===== BLOG =====
+  - name: "blog"
+    label: "Blog"
+    files:
+      - name: "blog_list"
+        label: "ブログ一覧"
+        file: "data/blog.json"
+        fields:
+          - label: "記事"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "ID(既存のものは変更しないでください)", name: "id", widget: "string", hint: "他のページへのリンク用の固有IDです。新しい記事には new-post-01 のような未使用の値を付けてください" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "ひとこと説明(一覧用)", name: "excerpt", widget: "string" }
+              - { label: "日付", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - label: "本文(詳細ページに表示)"
+                name: "body"
+                widget: "markdown"
+                required: false
+                modes: ["rich_text"]
+                buttons: ["bold", "heading-two", "heading-three", "link"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]

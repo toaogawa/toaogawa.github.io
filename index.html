@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<!-- /mv/xxx のようなURLになっても、相対パス(style.cssやassets/...)が正しくトップ基準で解決されるようにする -->
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>椎野乃々のウェブサイト</title>
+<meta name="description" content="これまでの活動記録をまとめたポートフォリオサイトです。">
+<link rel="icon" href="assets/icon.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="is-viewing-top">
+
+<!-- ========== モバイル用トップバー ========== -->
+<header class="mobile-bar">
+  <a href="#" data-panel="top" class="mobile-bar__icon-wrap">
+    <img src="assets/icon.jpg" alt="YOUR NAME" class="mobile-bar__icon" onerror="this.remove()">
+  </a>
+  <div class="mobile-bar__menu-trigger" id="mobileMenuTrigger">
+    <span class="mobile-bar__menu-label">menu→</span>
+    <button class="mobile-bar__toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- ========== 左ペイン：メニュー（PCでは画面の1/3） ========== -->
+  <aside class="nav-pane">
+    <div class="nav-pane__brand">
+      <a href="#" data-panel="top" class="nav-pane__icon-wrap">
+        <img src="assets/icon.jpg" alt="YOUR NAME" class="nav-pane__icon" onerror="this.remove()">
+      </a>
+    </div>
+
+    <nav aria-label="メインナビゲーション">
+      <ul class="nav-pane__list" id="navList">
+        <li data-panel="top" class="is-active">
+          <a href="#" data-panel="top" class="nav-pane__link">top</a>
+        </li>
+        <li data-panel="original">
+          <div class="nav-pane__row">
+            <a href="#" data-section="original" class="nav-pane__link">original</a>
+            <ul class="nav-pane__catlist">
+              <li><a href="#" class="nav-pane__cat" data-section="original" data-category="mv">mv</a></li>
+              <li><a href="#" class="nav-pane__cat" data-section="original" data-category="releases">releases</a></li>
+              <li><a href="#" class="nav-pane__cat" data-section="original" data-category="design">design</a></li>
+              <li><a href="#" class="nav-pane__cat" data-section="original" data-category="others">others</a></li>
+            </ul>
+          </div>
+        </li>
+        <li data-panel="works">
+          <div class="nav-pane__row">
+            <a href="#" data-section="works" class="nav-pane__link">works</a>
+            <ul class="nav-pane__catlist">
+              <li><a href="#" class="nav-pane__cat" data-section="works" data-category="video">video</a></li>
+              <li><a href="#" class="nav-pane__cat" data-section="works" data-category="music">music</a></li>
+              <li><a href="#" class="nav-pane__cat" data-section="works" data-category="design">design</a></li>
+              <li><a href="#" class="nav-pane__cat" data-section="works" data-category="others">others</a></li>
+            </ul>
+          </div>
+        </li>
+        <li data-panel="blog">
+          <a href="#" data-panel="blog" class="nav-pane__link">blog</a>
+        </li>
+        <li data-panel="contact">
+          <a href="#" data-panel="contact" class="nav-pane__link">contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav-scrollbar" id="navScrollbar">
+      <div class="nav-scrollbar__thumb" id="navScrollbarThumb"></div>
+    </div>
+  </aside>
+
+  <!-- ========== 右ペイン：コンテンツ（PCでは画面の2/3） ========== -->
+  <main class="view-pane" id="viewPane">
+
+    <!-- ===== TOP ===== -->
+    <section class="view is-active" id="view-top">
+      <div class="view__inner">
+        <a href="#" data-panel="listening" class="hero-image">
+          <img src="assets/hero.gif" alt="椎野乃々" onerror="this.remove()">
+        </a>
+        <p class="hero-name">椎野乃々</p>
+        <p class="hero-desc">しいののの。曲や映像を作ってます。</p>
+        <ul class="hero-links">
+          <li><a href="https://x.com/nonono_rain" target="_blank" rel="noopener">X (Twitter)</a></li>
+          <li><a href="https://www.youtube.com/@aimai.5036" target="_blank" rel="noopener">YouTube</a></li>
+          <li class="hero-links__pair">
+            <a href="https://www.nicovideo.jp/user/123464943" target="_blank" rel="noopener">ニコニコ動画</a>
+            <a href="https://drive.google.com/drive/folders/14TiNCbeLsuGgeU9SYpYMtmS-5s3uT9EH?usp=drive_link" target="_blank" rel="noopener">楽曲素材</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== LISTENING（アイコンクリックで表示。4曲がPC・スマホどちらも1画面に収まるレイアウト） ===== -->
+    <section class="view" id="view-listening">
+      <div class="view__inner">
+        <a href="#" data-panel="top" class="view__back">← back</a>
+        <h2 class="listening-title">( ´ー`).｡oO（わたしを構成する音楽）</h2>
+        <div class="listening-grid" id="listeningGrid"><!-- JSで生成 --></div>
+      </div>
+    </section>
+
+    <!-- ===== ORIGINAL（作品詳細。クリックした作品の内容をJSで差し込む） ===== -->
+    <section class="view" id="view-original-detail" data-nav-group="original">
+      <div class="view__inner">
+        <a href="#" data-panel="original-category" class="view__back">← back</a>
+        <div class="detail-thumb" id="originalDetailMedia"><!-- JSがiframeを挿入 --></div>
+        <h2 class="view__title detail-title" id="originalDetailTitle"></h2>
+        <div class="view__desc" id="originalDetailBody"></div>
+        <a href="#" data-panel="original-category" class="view__back view__back--bottom" id="originalDetailBackBottom">← back</a>
+      </div>
+    </section>
+
+    <!-- ===== ORIGINAL（カテゴリ別一覧。JSでカテゴリごとに内容を差し込む） ===== -->
+    <section class="view" id="view-original-category" data-nav-group="original">
+      <div class="view__inner">
+        <header class="view__head">
+          <span class="view__eyebrow">Original - 自主制作</span>
+          <h2 class="view__title" id="originalCategoryLabel"></h2>
+        </header>
+        <div class="thumb-grid" id="originalCategoryGrid"><!-- JSで生成 --></div>
+      </div>
+    </section>
+
+    <!-- ===== WORKS（作品詳細。クリックした作品の内容をJSで差し込む） ===== -->
+    <section class="view" id="view-work-detail" data-nav-group="works">
+      <div class="view__inner">
+        <a href="#" data-panel="works-category" class="view__back">← back</a>
+        <div class="detail-thumb" id="workDetailMedia"><!-- JSが画像またはiframeを挿入 --></div>
+        <h2 class="view__title detail-title" id="workDetailTitle"></h2>
+        <div class="view__desc" id="workDetailBody"></div>
+        <a href="#" data-panel="works-category" class="view__back view__back--bottom" id="workDetailBackBottom">← back</a>
+      </div>
+    </section>
+
+    <!-- ===== WORKS（カテゴリ別一覧。JSでカテゴリごとに内容を差し込む） ===== -->
+    <section class="view" id="view-works-category" data-nav-group="works">
+      <div class="view__inner">
+        <header class="view__head">
+          <span class="view__eyebrow">Works - ご依頼での制作</span>
+          <h2 class="view__title" id="worksCategoryLabel"></h2>
+        </header>
+        <div class="thumb-grid" id="worksCategoryGrid"><!-- JSで生成 --></div>
+      </div>
+    </section>
+
+    <!-- ===== BLOG ===== -->
+    <section class="view" id="view-blog">
+      <div class="view__inner">
+        <header class="view__head">
+          <span class="view__eyebrow">Blog - 意味があったりなかったり</span>
+          <h2 class="view__title">blog</h2>
+        </header>
+        <ul class="blog-list" id="blogList"><!-- JSで生成（新しい順） --></ul>
+      </div>
+    </section>
+
+    <!-- ===== BLOG（記事詳細。クリックした記事の内容をJSで差し込む） ===== -->
+    <section class="view" id="view-blog-detail" data-nav-group="blog">
+      <div class="view__inner">
+        <a href="#" data-panel="blog" class="view__back">← back</a>
+        <span class="view__eyebrow" id="blogDetailDate"></span>
+        <h2 class="view__title" id="blogDetailTitle"></h2>
+        <div class="view__desc" id="blogDetailBody"></div>
+        <a href="#" data-panel="blog" class="view__back view__back--bottom" id="blogDetailBackBottom">← back</a>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="view" id="view-contact">
+      <div class="view__inner">
+        <header class="view__head">
+          <span class="view__eyebrow">Contact - 連絡</span>
+          <h2 class="view__title">contact</h2>
+          <p class="view__desc">ご依頼・お問い合わせなど、こちらよりお気軽にご連絡ください！</p>
+        </header>
+        <a href="mailto:nonono.rain22@gmail.com" class="contact-email">nonono.rain22@gmail.com</a>
+        <ul class="contact-social">
+          <li><a href="https://x.com/nonono_rain" target="_blank" rel="noopener">X (Twitter) のDMでも可</a></li>
+        </ul>
+        <div class="contact-image">
+          <img src="assets/contact.gif" alt="" onerror="this.parentElement.remove()">
+        </div>
+          <p class="view__desc">「おててやわらかカニ キーホルダー」</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===== ORIGINAL「design」カテゴリ用ライトボックス ===== -->
+<div class="design-lightbox" id="designLightbox" aria-hidden="true">
+  <div class="design-lightbox__backdrop" id="designLightboxBackdrop"></div>
+  <button class="design-lightbox__close" id="designLightboxClose" aria-label="閉じる">&times;</button>
+  <button class="design-lightbox__arrow design-lightbox__arrow--prev" id="lightboxPrev" aria-label="前の画像">&lt;</button>
+  <div class="design-lightbox__box">
+    <div class="design-lightbox__img-wrap" id="designLightboxImgWrap">
+      <img class="design-lightbox__img" id="designLightboxImg" src="" alt="">
+    </div>
+    <p class="design-lightbox__title" id="designLightboxTitle"></p>
+  </div>
+  <button class="design-lightbox__arrow design-lightbox__arrow--next" id="lightboxNext" aria-label="次の画像">&gt;</button>
+</div>
+
+<!-- ===== 本文中の画像用ライトボックス（矢印なし・ホイールでズーム） ===== -->
+<div class="design-lightbox" id="bodyImageLightbox" aria-hidden="true">
+  <div class="design-lightbox__backdrop" id="bodyImageLightboxBackdrop"></div>
+  <button class="design-lightbox__close" id="bodyImageLightboxClose" aria-label="閉じる">&times;</button>
+  <div class="design-lightbox__box">
+    <div class="design-lightbox__img-wrap" id="bodyImageLightboxImgWrap">
+      <img class="design-lightbox__img" id="bodyImageLightboxImg" src="" alt="">
+    </div>
+  </div>
+</div>
+
+<canvas id="cursorTrail"></canvas>
+
+<script src="script.js"></script>
+</body>
+</html>

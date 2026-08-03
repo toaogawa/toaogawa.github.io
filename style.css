@@ -1,0 +1,759 @@
+/* =====================================================
+   DESIGN TOKENS
+   ===================================================== */
+:root{
+  --black:  #111111;
+  --white:  #F6F7F8;
+  --gray:   #999999;
+  --line:   #e4e4e4;
+
+  --font-family:  "Helvetica Neue", Helvetica, Arial, "Noto Sans JP", sans-serif;
+  --font-mono:    var(--font-family);
+  --font-display: var(--font-family);
+  --font-body:    var(--font-family);
+
+  --nav-w: 33.3333%;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* ページ全体のスクロールバーを出さない */
+}
+
+body{
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+}
+
+a{ color: inherit; text-decoration: none; }
+ul{ list-style: none; margin:0; padding:0; }
+h1,h2,h3,p{ margin:0; }
+img{ max-width:100%; display:block; }
+button{ font-family: inherit; }
+
+::selection{ background: var(--black); color: var(--white); }
+
+.nav-pane, .view-pane{
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-pane::-webkit-scrollbar,
+.view-pane::-webkit-scrollbar{ display:none; }
+
+/* =====================================================
+   全体レイアウト（PC: 左1/3メニュー・右2/3コンテンツ）
+   ===================================================== */
+.app{
+  display:flex;
+  height: 100vh;   /* 古いブラウザ向けの保険 */
+  height: 100dvh;  /* ブラウザのバー分を差し引いた「実際に見える高さ」 */
+  width: 100vw;
+}
+
+/* ---- 左ペイン：メニュー ---- */
+.nav-pane{
+  position: relative;
+  width: var(--nav-w);
+  height: 100%;
+  flex-shrink: 0;
+  padding: 60px 56px;
+  display:flex;
+  flex-direction:column;
+  overflow-y: auto;
+}
+.nav-pane__brand{ flex-shrink: 0; }
+.nav-pane nav{
+  flex: 1;
+  min-height: 0;
+  display:flex;
+  align-items: safe center; /* 縦の余白が足りないときは上寄せになり、アイコンと重ならないようにする */
+}
+
+.nav-pane__icon-wrap{
+  display: block;
+  width: 56px;
+  height: 56px;
+  background: #f2f2f2;
+  overflow: hidden;
+}
+.nav-pane__icon{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+
+.nav-pane__list{ display:flex; flex-direction:column; gap: 6px; }
+.nav-pane__row{ display:flex; align-items:flex-start; gap: 52px; }
+.nav-pane__link{
+  display:inline-block;
+  flex-shrink: 0;
+  padding: 10px 0;
+  font-size: clamp(17px, 1.5vw, 21px);
+  letter-spacing:.03em;
+  color: var(--gray);
+  text-transform: lowercase;
+  transition: color .2s var(--ease);
+}
+.nav-pane__list li:hover .nav-pane__link{ color: var(--black); }
+.nav-pane__list li.is-active .nav-pane__link{
+  color: var(--black);
+  font-weight:700;
+}
+
+/* カテゴリ一覧（ORIGINAL・WORKS）：メニュータイトルと同じ文字サイズ、スクロールなし */
+.nav-pane__catlist{
+  display:none;
+  flex: 1;
+  min-width: 0;
+}
+.nav-pane__list li.is-active .nav-pane__catlist{ display:block; }
+.nav-pane__cat{
+  display:block;
+  padding: 4px 0;
+  font-size: clamp(17px, 1.5vw, 21px);
+  letter-spacing:.03em;
+  color: var(--gray);
+  text-transform: lowercase;
+  transition: color .2s var(--ease);
+}
+.nav-pane__cat:hover{ color: var(--black); }
+.nav-pane__cat.is-active{ color: var(--black); font-weight:700; }
+
+/* ---- 右ペイン：コンテンツ ---- */
+.view-pane{
+  width: calc(100% - var(--nav-w));
+  height: 100%;
+  overflow-y: auto;
+}
+
+.view{
+  display:none;
+  min-height: 100%;
+  padding: 60px 8vw 100px;
+}
+.view.is-active{ display:block; }
+#view-top.is-active{ display:flex; align-items:flex-start; }
+
+.view__inner{ width:100%; max-width: 640px; }
+
+.view__head{ margin-bottom: 64px; max-width: 560px; }
+.view__eyebrow{
+  font-size: 14px;
+  letter-spacing: .1em;
+  color: var(--gray);
+  margin-bottom: 16px;
+  display:block;
+}
+.view__title{
+  font-weight: 700;
+  font-size: clamp(30px, 3.4vw, 44px);
+  letter-spacing: .06em;
+  line-height: 1;
+  margin-bottom: 0;
+}
+/* ORIGINAL・WORKSの詳細ページ：作品タイトルは長くなりがちなので少し小さくする */
+.detail-title{
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.3;
+}
+.view__desc{
+  font-size: 13px;
+  line-height: 2;
+  color: var(--gray);
+  max-width: 600px;
+}
+/* ===== Decap CMSで編集する本文まわりのスタイル ===== */
+/* アーティスト名と本文の間隔 */
+.detail-artist{
+  margin-bottom: 36px;
+  color: var(--gray);
+}
+/* 本文の文字サイズを少し大きく、色は黒に（アーティスト名は上のdetail-artistで灰色のまま維持） */
+.view__desc p:not(.detail-artist){
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--black);
+  margin-bottom: 0.6em;
+}
+/* 本文中のリンクは水色・下線で表示 */
+.view__desc a{
+  color: #4fb0ef;
+  text-decoration: underline;
+  word-break: break-all;
+}
+.view__desc a:hover{
+  opacity: .8;
+}
+/* 見出し（本文17pxに合わせたサイズ） */
+.view__desc h2, .view__desc h3{
+  margin-top: 28px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  color: var(--black);
+}
+.view__desc h2{ font-size: 23px; }
+.view__desc h3{ font-size: 20px; }
+/* 画像を連続して挿入すると、JS側(groupConsecutiveImages)が2枚ずつ .img-grid で囲みます */
+.view__desc .img-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0;
+}
+.view__desc .img-unit img, .view__desc .img-unit video{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+/* 「Image(大)」で挿入した画像（画面いっぱいに近い大きさで表示） */
+.view__desc .img-full{
+  margin: 20px 0;
+}
+.view__desc .img-full img, .view__desc .img-full video{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+/* 画像の説明書き（灰色の小文字） */
+.view__desc .img-caption{
+  display: block;
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+/* 本文中で {br} と単独で書いた場所に、意図的な1行分の空白を入れる */
+.view__desc .blank-line{
+  display: block;
+  height: 2em;
+}
+/* Xの投稿を埋め込んだときの見た目調整 */
+.view__desc .twitter-tweet{
+  margin: 20px 0;
+}
+/* YouTube動画を埋め込んだときの見た目 */
+.view__desc .yt-embed{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 20px 0;
+}
+.view__desc .yt-embed iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  border-radius: 4px;
+}
+/* 本文中で {large}...{/large} {small}...{/small} {pink}...{/pink} と書いた部分の見た目 */
+.view__desc .text-lg{
+  font-size: 2.7em;
+}
+.view__desc .text-sm{
+  font-size: 0.8em;
+}
+.view__desc .text-pink{
+  color: #EE7C88;
+}
+
+/* =====================================================
+   MOBILE TOP BAR + オーバーレイメニュー
+   ===================================================== */
+.mobile-bar{
+  display:none;
+  position: fixed;
+  top:0; left:0; right:0;
+  height: 56px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  align-items:center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 200;
+}
+.mobile-bar__icon-wrap{
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: #f2f2f2;
+  overflow: hidden;
+}
+.mobile-bar__icon{ width:100%; height:100%; object-fit:cover; display:block; }
+.mobile-bar__menu-trigger{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  cursor: pointer;
+}
+.mobile-bar__menu-label{
+  font-family: var(--font-family);
+  font-size: 14px;
+  letter-spacing:.05em;
+  color: var(--black);
+}
+.nav-open .mobile-bar__menu-label{ display:none; }
+.mobile-bar__toggle{
+  width:24px; height:16px;
+  background:none; border:none;
+  position:relative;
+  cursor:pointer;
+  padding:0;
+}
+.mobile-bar__toggle span{
+  position:absolute; left:0; right:0;
+  height:1px; background: var(--black);
+  transition: transform .25s var(--ease), opacity .25s var(--ease);
+}
+.mobile-bar__toggle span:nth-child(1){ top:0; }
+.mobile-bar__toggle span:nth-child(2){ top:7px; }
+.mobile-bar__toggle span:nth-child(3){ top:14px; }
+/* ハンバーガーの見た目(3本線⇔×)はCSSのクラスではなく、
+   script.js側で直接style指定して切り替えます（表示のズレを防ぐため） */
+
+.mobile-nav{
+  position: fixed;
+  top:56px; left:0; right:0; bottom:0;
+  background: var(--white);
+  transform: translateY(-110%);
+  transition: transform .3s var(--ease);
+  z-index: 150;
+  display:flex;
+  flex-direction:column;
+  padding: 12px 8vw 40px;
+  gap: 6px;
+  overflow-y:auto;
+}
+.nav-open .mobile-nav{ transform: translateY(0); }
+.mobile-nav a{
+  font-weight:700;
+  font-size: 20px;
+  letter-spacing:.04em;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  text-transform: lowercase;
+}
+.mobile-nav__group{ border-bottom: 1px solid var(--line); }
+.mobile-nav__group .nav-pane__link{
+  display:block;
+  font-weight:700;
+  font-size: 20px;
+  letter-spacing:.04em;
+  padding: 16px 0 8px;
+  color: var(--black);
+}
+.mobile-nav__cats{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding-bottom: 16px;
+}
+.mobile-nav__cats .nav-pane__cat{
+  font-size: 15px;
+  padding: 6px 0 6px 16px;
+  color: var(--gray);
+}
+
+/* =====================================================
+   TOP
+   ===================================================== */
+.hero-image{
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  background: #FFFFFF;
+  overflow: hidden;
+  margin-bottom: 28px;
+  cursor: pointer;
+}
+.hero-image img{
+  width:100%; height:100%; object-fit: contain; display:block;
+}
+.hero-name{
+  font-weight:700;
+  font-size: 16px;
+  letter-spacing:.03em;
+  margin-bottom: 6px;
+}
+.hero-desc{
+  font-size: 13px;
+  color: var(--gray);
+}
+.hero-links{
+  display:flex;
+  flex-direction:column;
+  gap: 8px;
+  margin-top: 24px;
+  max-width: 380px; /* hero-imageのmax-widthと合わせて右端をそろえる */
+  font-size: 12px;
+  color: var(--gray);
+}
+.hero-links a{
+  color: #4fb0ef;
+  text-decoration: none;
+  transition: opacity .2s var(--ease);
+}
+.hero-links a:hover{ opacity: .8; }
+.hero-links__pair{
+  display:flex;
+  justify-content: space-between;
+}
+
+/* =====================================================
+   LISTENING（アイコンをクリックした時のページ）
+   4曲とも正方形のサムネイルで、2列に並べる（他のページと同じ、通常のスクロール）
+   ===================================================== */
+.listening-title{
+  font-weight: 700;
+  font-size: clamp(18px, 2vw, 26px);
+  letter-spacing: .06em;
+  line-height: 1.3;
+  margin-bottom: 32px;
+}
+.listening-grid{
+  display:flex;
+  flex-direction:column;
+  gap: 20px;
+}
+.listening-row{
+  display:flex;
+  gap: 20px;
+  align-items: flex-start; /* 基本は上端に揃える（2番目のサムネイルはこのまま） */
+}
+.listening-item{
+  cursor:pointer;
+  flex: 1;
+  min-width: 0; /* 中身のサイズで勝手に広がり、正方形がズレるのを防ぐ */
+}
+/* 2番目・3番目のサムネイルだけ少し小さくする。
+   同じ段の中でぴったり隣り合うよう、余白ではなく比率(flex)で幅を分け合う */
+.listening-item--small{ flex: 0.6; }
+/* 3番目(下段の左)だけは、隣の4番目(大)の下端に揃える */
+.listening-row:nth-child(2) .listening-item--small{ align-self: flex-end; }
+.listening-item__thumb{
+  width:100%;
+  aspect-ratio: 1 / 1; /* 4曲とも常に正方形 */
+  position:relative;
+  overflow:hidden;
+  background: #f2f2f2;
+}
+.listening-item__thumb img,
+.listening-item__thumb iframe{
+  width:100%; height:100%; object-fit:cover; border:0; display:block;
+}
+.listening-item__play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+.listening-item__play::before{
+  content:"";
+  width:34px; height:34px;
+  border-radius:50%;
+  border:1px solid var(--white);
+  opacity:0;
+  transition: opacity .2s var(--ease);
+}
+.listening-item__play::after{
+  content:"";
+  position:absolute;
+  border-style: solid;
+  border-width: 6px 0 6px 9px;
+  border-color: transparent transparent transparent var(--white);
+  opacity:0;
+  transition: opacity .2s var(--ease);
+  transform: translateX(2px);
+}
+.listening-item:hover .listening-item__play::before,
+.listening-item:hover .listening-item__play::after{ opacity:1; }
+.listening-item__title{
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight:700;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* =====================================================
+   ORIGINAL / WORKS 詳細・カテゴリビューの「戻る」リンク
+   ===================================================== */
+.view__back{
+  display:inline-block;
+  font-size: 15px;
+  color: var(--gray);
+  margin-bottom: 40px;
+  transition: color .2s var(--ease);
+}
+.view__back:hover{ color: var(--black); }
+/* 内容が長いページだけ、JS側で表示する一番下の「← back」 */
+.view__back--bottom{
+  display: none;
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+/* =====================================================
+   THUMB LIST（ORIGINAL・WORKS共通：サムネイルが縦に並ぶ一覧・枠なし）
+   ===================================================== */
+.thumb-grid{ display:flex; flex-direction:column; gap: 44px; }
+.thumb-item{ display:block; cursor:pointer; }
+.thumb-item__thumb{
+  width:100%;
+  aspect-ratio: 16/9;
+  overflow:hidden;
+  background: var(--white); /* 余白部分もページの背景色と同じにする */
+  margin-bottom: 14px;
+}
+.thumb-item__thumb img, .thumb-item__thumb video{
+  width:100%; height:100%; object-fit: contain; display:block;
+  transition: opacity .25s var(--ease);
+}
+.thumb-item:hover .thumb-item__thumb img, .thumb-item:hover .thumb-item__thumb video{ opacity:.85; }
+.thumb-item__title{ font-weight:700; font-size: 14px; margin-bottom: 6px; }
+.thumb-item__row{
+  display:flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.thumb-item__desc{ font-size: 12px; line-height: 1.8; color: var(--gray); }
+.thumb-item__date{
+  font-size: 11px;
+  color: var(--gray);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* =====================================================
+   ORIGINAL / WORKS 詳細ビュー
+   ===================================================== */
+.detail-thumb{
+  width:100%;
+  aspect-ratio: 16/9; /* 正方形の画像でも、横長(16:9)のときと同じくらいの高さに揃える */
+  overflow:hidden;
+  background: var(--white); /* 余白部分もページの背景色と同じにする */
+  margin-bottom: 32px;
+}
+.detail-thumb img{ width:100%; height:100%; object-fit: contain; display:block; }
+.detail-thumb video{ width:100%; height:100%; object-fit: contain; display:block; }
+.detail-thumb iframe{ width:100%; height:100%; border:0; display:block; }
+
+/* =====================================================
+   BLOG
+   ===================================================== */
+.blog-list{ border-top: 1px solid var(--line); }
+.blog-item{
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0;
+  cursor: pointer;
+  display:grid;
+  grid-template-columns: 90px 1fr;
+  align-items:center;
+  gap: 20px;
+  transition: opacity .2s var(--ease);
+}
+.blog-item:hover{ opacity:.6; }
+.blog-item__date{ font-size: 11px; color: var(--gray); }
+.blog-item__body{ min-width:0; }
+.blog-item__title{ font-weight:700; font-size: 14px; margin-bottom: 6px; }
+.blog-item__excerpt{
+  font-size: 12px; color: var(--gray); line-height:1.7;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* =====================================================
+   CONTACT
+   ===================================================== */
+.contact-email{
+  display:inline-block;
+  font-size: clamp(18px, 2.6vw, 23px);
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 6px;
+  margin-bottom: 40px;
+  transition: color .2s var(--ease);
+}
+.contact-email:hover{ color: var(--gray); }
+.contact-social{
+  display:flex; gap: 20px; flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 60px;
+}
+.contact-social a{ transition: color .2s var(--ease); }
+.contact-social a:hover{ color: var(--black); }
+.contact-image{
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 10px;
+}
+.contact-image img{
+  width:100%; height:auto; display:block;
+}
+/* =====================================================
+   FOCUS
+   ===================================================== */
+a:focus-visible, button:focus-visible{
+  outline: 1px solid var(--black);
+  outline-offset: 3px;
+}
+
+/* =====================================================
+   カーソル追従の点線
+   ===================================================== */
+#cursorTrail{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* =====================================================
+   左メニュー右端のミニスクロールバー（右側コンテンツを素早くスクロールする用）
+   道（トラック）は透明のまま、正方形のつまみだけを表示する
+   ===================================================== */
+.nav-scrollbar{
+  display:none;
+  position:absolute;
+  right: 14px;
+  width: 40px;
+  z-index: 10;
+  /* top・heightはJSで「topの項目〜contactの項目」の実際の位置に合わせて設定します */
+}
+.nav-scrollbar.is-visible{ display:block; }
+.nav-scrollbar__thumb{
+  position:absolute;
+  top:0;
+  left:0;
+  width:40px;
+  height:40px;
+  background: #F8ABA6;
+  cursor: grab;
+  touch-action: none; /* 指でドラッグしたときにページ側がスクロールしてしまわないようにする */
+}
+.nav-scrollbar__thumb:active{ cursor: grabbing; }
+
+/* =====================================================
+   ORIGINAL「design」カテゴリ用ライトボックス
+   ・矢印と閉じるボタンは画像サイズに関係なく常に同じ位置（position:fixed）
+   ・画像にカーソルを合わせて動かすと、その位置を中心に拡大表示される
+   ===================================================== */
+.design-lightbox{
+  display:none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+.design-lightbox.is-open{ display:flex; }
+.design-lightbox__backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(17,17,17,.85);
+}
+.design-lightbox__box{
+  position: relative;
+  z-index: 1;
+  width: min(760px, 78vw);
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.design-lightbox__img-wrap{
+  width: 100%;
+  height: 80vh;
+  overflow: visible; /* 拡大した画像が枠の外(画面いっぱい)まで見えるようにする */
+  cursor: zoom-in;
+}
+.design-lightbox__img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 画像全体を切り取らずに表示する（枠の背景は透明なので余白も目立たない） */
+  display:block;
+  transition: opacity .15s ease, transform .1s ease;
+  transform-origin: center center;
+}
+.design-lightbox__title{
+  margin-top: 14px;
+  color: var(--white);
+  font-size: 13px;
+  text-align:center;
+}
+
+/* 閉じるボタン：常に画面左上の同じ位置（画像サイズに影響されない） */
+.design-lightbox__close{
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 3;
+  background:none;
+  border:none;
+  color: var(--white);
+  font-size: 40px;
+  line-height: 1;
+  cursor:pointer;
+}
+
+/* 矢印：常に画面の同じ左右位置（画像サイズに影響されない）。
+   拡大した画像の上に来ても見えるよう、半透明の黒い四角を背景に敷く */
+.design-lightbox__arrow{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: rgba(0,0,0,.4);
+  border:none;
+  color: var(--white);
+  font-size: 40px;
+  font-weight: 700;
+  padding: 16px 20px;
+  cursor:pointer;
+  transition: background .2s var(--ease);
+}
+.design-lightbox__arrow--prev{ left: 24px; }
+.design-lightbox__arrow--next{ right: 24px; }
+.design-lightbox__arrow:hover{ background: rgba(0,0,0,.6); }
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 900px) and (orientation: portrait), (max-height: 500px) and (orientation: landscape){
+  html, body{ overflow: auto; height: auto; }
+  .nav-pane{ display:none; }
+  .app{ display:block; height:auto; }
+  .view-pane{ width:100%; height:auto; border-left:none; }
+  .view{
+    min-height: calc(100vh - 56px);  /* 古いブラウザ向けの保険 */
+    min-height: calc(100dvh - 56px);
+    padding: 90px 6vw 70px;
+  }
+  #view-top.is-active{ display:block; padding-top: 80px; }
+  .mobile-bar{ display:flex; }
+  .blog-item{ grid-template-columns: 1fr; gap:6px; }
+  .view__inner{ margin: 0 auto; } /* コンテンツが画面幅より狭いときは中央に揃える（左寄りにならないように） */
+
+  /* ライトボックス：スマホでは矢印・閉じるボタンの余白を詰めて画像を広く見せる */
+  .design-lightbox__arrow{ padding: 8px; font-size: 26px; }
+  .design-lightbox__arrow--prev{ left: 8px; }
+  .design-lightbox__arrow--next{ right: 8px; }
+  .design-lightbox__close{ top: 12px; left: 12px; font-size: 32px; }
+  .design-lightbox__box{ width: 86vw; }
+  .design-lightbox__img-wrap{ height: 70vh; }
+
+  /* TOPを表示しているときだけ「menu→」の文字がやわらかく点滅する（3秒に1回）
+     ※ハンバーガーアイコンの親要素ごと動かすと、一部のスマホブラウザで
+       アイコンの表示が更新されなくなる不具合が起きるため、文字だけを動かす */
+  body.is-viewing-top .mobile-bar__menu-label{
+    animation: menuTriggerPulse 3s ease-in-out infinite;
+  }
+}
+
+@keyframes menuTriggerPulse{
+  0%, 80%, 100%{ opacity: 1; }
+  15%{ opacity: .20; }
+}

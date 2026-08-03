@@ -1,0 +1,144 @@
+{
+  "items": [
+    {
+      "id": "video-01",
+      "title": "新兎わい様 配信OP「カオス☆ニート」",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "rqqlpDPVNk4",
+      "desc": "配信用OPアニメーションを制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2024-02-11"
+    },
+    {
+      "id": "video-02",
+      "title": "ミギハヤミ・コハク様 配信OP「放浪者を強くしてあげよう」",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "eXzCiyMD5AU",
+      "desc": "配信用OPアニメーションを制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2024-08-05"
+    },
+    {
+      "id": "video-03",
+      "title": "コトノネ - 感情線",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "kN6jMmZXN94",
+      "desc": "映像と絵を制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2025-06-27"
+    },
+    {
+      "id": "video-04",
+      "title": "さよならエリクサー - 感情市街記録",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "uP-AofENa_k",
+      "desc": "映像を制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2025-10-15"
+    },
+    {
+      "id": "video-05",
+      "title": "熱異常 - 百軒カナリcover",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "z2YZLFyP2NM",
+      "desc": "映像と絵を制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2025-11-20"
+    },
+    {
+      "id": "video-06",
+      "title": "メルカリで愛が買える時代になったら - はしメロ",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "KT603xYXNIA",
+      "desc": "映像を制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2025-10-15"
+    },
+    {
+      "id": "video-07",
+      "title": "NEO愛桜宣言 - 櫻坂46 佐藤愛桜",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "c1_-qKAA6I4",
+      "desc": "MVのモーションデザインを制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2026-02-26"
+    },
+    {
+      "id": "video-08",
+      "title": "あした地球がこなごなになっても - kaza×日あさ寝×桃寝ちのい×N×恋白るな×エリモ・クドリャフカcover",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "k1qvo9tH1QQ",
+      "desc": "映像を制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2026-03-11"
+    },
+    {
+      "id": "video-09",
+      "title": "キルミーダーリン - 灰色ねむり×null",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "06K_77uaUNk",
+      "desc": "映像を制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": "video",
+      "date": "2026-03-28"
+    },
+    {
+      "id": "music-01",
+      "title": "VOID - ﾀﾄ",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "LqAWnhfqJCw",
+      "desc": "曲と映像を制作しました。",
+      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
+      "category": [
+        "video",
+        "music"
+      ],
+      "date": "2026-3-14"
+    },
+    {
+      "id": "design-01",
+      "title": "トキワの森「あんしん」Tシャツデザイン(背面)",
+      "thumbnail": "assets/works/w-design/あんしんジャケット.png",
+      "desc": "ロックバンド「トキワの森」様のTシャツデザイン(背面)を制作しました。",
+      "detail": "MVのサムネイルやSNS用ビジュアルを制作しました。キャラクターの表情や色使いにこだわり、楽曲の雰囲気が一目で伝わるようなビジュアルを目指しました。",
+      "category": "design",
+      "date": "2025-08-14"
+    },
+    {
+      "id": "design-02",
+      "title": "ﾀﾄ「VOID」ジャケットデザイン",
+      "thumbnail": "assets/works/w-design/VOIDジャケット.png",
+      "desc": "ﾀﾄ様のオリジナル楽曲「VOID」及びそのジャケットデザインを制作しました。",
+      "detail": "MVのサムネイルやSNS用ビジュアルを制作しました。キャラクターの表情や色使いにこだわり、楽曲の雰囲気が一目で伝わるようなビジュアルを目指しました。",
+      "category": "design",
+      "date": "2026-03-16"
+    },
+    {
+      "id": "design-03",
+      "title": "「Who’s the Witch」ジャケットデザイン",
+      "thumbnail": "assets/works/w-design/桜羽エマジャケット1.png",
+      "desc": "`bootleg‘まのさばコンピ「Who’s the Witch」のジャケットデザインを制作しました。",
+      "detail": "MVのサムネイルやSNS用ビジュアルを制作しました。キャラクターの表情や色使いにこだわり、楽曲の雰囲気が一目で伝わるようなビジュアルを目指しました。",
+      "category": "design",
+      "date": "2026-06-27"
+    },
+    {
+      "id": "others-01",
+      "title": "ラメリィ「メズマライザー」Cover動画サムネイル",
+      "thumbnail": "assets/works/motion-01.jpg",
+      "youtubeId": "vltGaTpJiC4",
+      "desc": "ラメリィ様の「メズマライザー」cover動画のサムネイルを制作しました。",
+      "detail": "MVのサムネイルやSNS用ビジュアルを制作しました。キャラクターの表情や色使いにこだわり、楽曲の雰囲気が一目で伝わるようなビジュアルを目指しました。",
+      "category": "others",
+      "date": "2024-07-06"
+    }
+  ]
+}
