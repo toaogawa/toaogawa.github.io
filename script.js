@@ -229,6 +229,12 @@ function openOriginalDetail(id){
   const w = mvWorks.find(x => x.id === id);
   if(!w) return;
 
+  // 「← back」で戻る先のカテゴリ一覧を、先に裏側で組み立てておく
+  // (更新ボタンでこの詳細ページに直接入ってきた場合、一覧ページが
+  //  一度も作られないまま back を押すと空欄になってしまうため)
+  const detailCategory = Array.isArray(w.category) ? w.category[0] : w.category;
+  populateCategoryView('original', detailCategory);
+
   const media = document.getElementById('originalDetailMedia');
   if(w.youtubeId){
     media.innerHTML = `<iframe src="https://www.youtube.com/embed/${w.youtubeId}" title="${w.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
@@ -416,6 +422,12 @@ function openWorkDetail(id){
   const w = otherWorks.find(x => x.id === id);
   if(!w) return;
 
+  // 「← back」で戻る先のカテゴリ一覧を、先に裏側で組み立てておく
+  // (更新ボタンでこの詳細ページに直接入ってきた場合、一覧ページが
+  //  一度も作られないまま back を押すと空欄になってしまうため)
+  const detailCategory = Array.isArray(w.category) ? w.category[0] : w.category;
+  populateCategoryView('works', detailCategory);
+
   const media = document.getElementById('workDetailMedia');
   if(w.youtubeId){
     media.innerHTML = `<iframe src="https://www.youtube.com/embed/${w.youtubeId}" title="${w.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
@@ -453,7 +465,11 @@ function matchesCategory(item, cat){
   return item.category === cat;
 }
 
-function openCategoryView(section, category){
+// カテゴリ一覧(サムネイル一覧)の中身だけを組み立てる処理。
+// 画面の切り替え(switchPanel)やURLの更新は行わない。
+// 詳細ページを直接開いた(リロードした)ときにも、裏側の一覧ページを
+// 用意しておくためにこの関数を単独で呼び出せるようにしている。
+function populateCategoryView(section, category){
   const cat = category || lastCategory[section];
   lastCategory[section] = cat;
 
@@ -466,12 +482,21 @@ function openCategoryView(section, category){
     const items = mvWorks.filter(w => matchesCategory(w, cat)).sort(byNewest);
     renderThumbList('originalCategoryGrid', items, 'original');
     document.getElementById('originalCategoryLabel').textContent = cat;
-    switchPanel('original-category', true);
-    setUrlPath(`/original/${cat}`);
   }else{
     const items = otherWorks.filter(w => matchesCategory(w, cat)).sort(byNewest);
     renderThumbList('worksCategoryGrid', items, 'work');
     document.getElementById('worksCategoryLabel').textContent = cat;
+  }
+  return cat;
+}
+
+function openCategoryView(section, category){
+  const cat = populateCategoryView(section, category);
+
+  if(section === 'original'){
+    switchPanel('original-category', true);
+    setUrlPath(`/original/${cat}`);
+  }else{
     switchPanel('works-category', true);
     setUrlPath(`/works/${cat}`);
   }
