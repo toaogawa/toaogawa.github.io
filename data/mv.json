@@ -1,6 +1,24 @@
 {
   "items": [
     {
+      "id": "mv-15",
+      "title": "やみまじょがふってきた",
+      "artist": "donor.",
+      "youtubeId": "-65alg-fWtY",
+      "category": "mv",
+      "date": "2026-07-03",
+      "body": "**ボカデュオ2026参加作品**\n\n## **見出し２**\n\n### **見出し３**\n\n### \\[credit]\n\n{large}あああああああ{/large}\n\n{pink}{large}ああああああ{/large}{/pink}\n\n{small}あああああああ{/small}\n\n曲/映像：椎野乃々 <https://x.com/nonono_rain>\n\n歌：シユ <https://x.com/Nek0_Myq>\n\npoetry：itwa <https://x.com/itu_128>\n\n絵：あるぎ <https://x.com/ganbaruman_arg>\n\n### Twitter\n\n<https://x.com/nonono_rain/status/2072957403554099575?s=20>\n\n[椎野乃々](https://x.com/nonono_rain)\n\nテスト\n\n{img src=\"/assets/uploads/322_20250126143735.jpg\" text=\"てすと\"}\n\n{img src=\"/assets/uploads/4a93dbee-b472-4ff1-a892-457df09d740f.jpg\" text=\"説明書きテスト\"}\n\n{img src=\"/assets/uploads/img_2276.png\"}\n\n{img src=\"/assets/uploads/yamimajo44.png\"}\n\n{fullimg src=\"/assets/uploads/322_20250126143735.jpg\"}\n\n[これ](https://nonoshiino.pages.dev/blog/post-01)\n\n{fullimg src=\"/assets/uploads/yamimajo44.png\" text=\"説明書きのテスト\"}\n\nhttps://www.youtube.com/watch?v=YDENY5-ZI2E"
+    },
+    {
+      "id": "mv-14",
+      "title": "放送委員",
+      "artist": "ナースロボ_タイプT",
+      "youtubeId": "38j_-GrNPoU",
+      "category": "mv",
+      "date": "2026-05-03",
+      "body": ""
+    },
+    {
       "id": "mv-01",
       "title": "ブラックボックス！",
       "artist": "重音テト、ナースロボ＿タイプＴ",
@@ -115,25 +133,7 @@
       "youtubeId": "3T6iq0DYREM",
       "category": "mv",
       "date": "2026-01-31",
-      "body": ""
-    },
-    {
-      "id": "mv-14",
-      "title": "放送委員",
-      "artist": "ナースロボ_タイプT",
-      "youtubeId": "38j_-GrNPoU",
-      "category": "mv",
-      "date": "2026-05-03",
-      "body": ""
-    },
-    {
-      "id": "mv-15",
-      "title": "やみまじょがふってきた",
-      "artist": "donor.",
-      "youtubeId": "-65alg-fWtY",
-      "category": "mv",
-      "date": "2026-06-20",
-      "body": ""
+      "body": "**ボカデュオ2026参加作品**\n\n{fullimg src=\"/assets/uploads/591_20250125223824.png\" text=\"こんづさんラフ\"}\n\n{img src=\"/assets/uploads/gythul2aaaacgem.jpg\"}"
     },
     {
       "id": "mv-16",
