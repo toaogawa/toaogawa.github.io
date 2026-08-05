@@ -1,16 +1,6 @@
 {
   "items": [
     {
-      "id": "video-01",
-      "title": "新兎わい様 配信OP「カオス☆ニート」",
-      "thumbnail": "assets/works/motion-01.jpg",
-      "youtubeId": "rqqlpDPVNk4",
-      "desc": "配信用OPアニメーションを制作しました。",
-      "detail": "チャンネル用のオープニングロゴモーションです。短い尺の中でブランドの世界観を伝えられるよう、動きとタイミングを調整しました。",
-      "category": "video",
-      "date": "2024-02-11"
-    },
-    {
       "id": "video-02",
       "title": "ミギハヤミ・コハク様 配信OP「放浪者を強くしてあげよう」",
       "thumbnail": "assets/works/motion-01.jpg",
