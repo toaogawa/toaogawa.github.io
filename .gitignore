@@ -4,3 +4,6 @@
 # Windowsが自動で作るファイル
 Thumbs.db
 desktop.ini
+
+# VS Code の自分用設定（Live Serverなど）
+.vscode/
