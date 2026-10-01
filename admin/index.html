@@ -38,6 +38,16 @@
       toBlock: data => `{pink}${data.body}{/pink}`,
       toPreview: data => `<span style="color:#EE7C88;">${data.body}</span>`,
     });
+    // 空白(サイトでは {br} が2行分くらいの空白になる。もっと空けたいときは複数置く)
+    CMS.registerEditorComponent({
+      id: 'blank-line',
+      label: '空白',
+      fields: [],
+      pattern: /^\{br\}$/,
+      fromBlock: () => ({}),
+      toBlock: () => '{br}',
+      toPreview: () => '<div style="height:2em;"></div>',
+    });
     // Image(大)・Image(小)（アップロード先は今まで通りassets/uploadsに統一）
     CMS.registerEditorComponent({
       id: 'single-image',

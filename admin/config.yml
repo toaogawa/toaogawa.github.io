@@ -6,6 +6,10 @@ backend:
   base_url: https://toaogawa-cms-auth.nonono-rain22.workers.dev
   auth_endpoint: auth
 
+# 127.0.0.1 / localhost で開いたときだけ、PC上のファイルを直接編集するローカルモードになる
+# (npx decap-server を起動しておく必要あり。本番のCMSには影響しない)
+local_backend: true
+
 # 画像をアップロードしたときの保存先フォルダと、サイト上での参照パス
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
@@ -40,7 +44,7 @@ collections:
                 required: false
                 modes: ["rich_text"]
                 buttons: ["bold", "heading-two", "heading-three", "link"]
-                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text", "blank-line"]
 
   # ===== ORIGINAL - RELEASES =====
   - name: "original-releases"
@@ -109,7 +113,7 @@ collections:
                 required: false
                 modes: ["rich_text"]
                 buttons: ["bold", "heading-two", "heading-three", "link"]
-                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text", "blank-line"]
 
   # ===== WORKS - MOVIE(video) =====
   - name: "works-movie"
@@ -137,7 +141,7 @@ collections:
                 required: false
                 modes: ["rich_text"]
                 buttons: ["bold", "heading-two", "heading-three", "link"]
-                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text", "blank-line"]
 
   # ===== WORKS - MUSIC =====
   - name: "works-music"
@@ -165,7 +169,7 @@ collections:
                 required: false
                 modes: ["rich_text"]
                 buttons: ["bold", "heading-two", "heading-three", "link"]
-                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text", "blank-line"]
 
   # ===== WORKS - DESIGN =====
   - name: "works-design"
@@ -193,7 +197,7 @@ collections:
                 required: false
                 modes: ["rich_text"]
                 buttons: ["bold", "heading-two", "heading-three", "link"]
-                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text", "blank-line"]
 
   # ===== WORKS - OTHERS =====
   - name: "works-others"
@@ -221,7 +225,7 @@ collections:
                 required: false
                 modes: ["rich_text"]
                 buttons: ["bold", "heading-two", "heading-three", "link"]
-                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text", "blank-line"]
 
   # ===== BLOG =====
   - name: "blog"
@@ -246,4 +250,4 @@ collections:
                 required: false
                 modes: ["rich_text"]
                 buttons: ["bold", "heading-two", "heading-three", "link"]
-                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text"]
+                editor_components: ["single-image", "image", "large-text", "small-text", "pink-text", "blank-line"]
