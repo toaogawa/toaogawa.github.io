@@ -1,0 +1,6 @@
+# Cloudflare wrangler のキャッシュ（公開しない）
+.wrangler/
+
+# Windowsが自動で作るファイル
+Thumbs.db
+desktop.ini

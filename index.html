@@ -68,9 +68,6 @@
             </ul>
           </div>
         </li>
-        <li data-panel="blog">
-          <a href="#" data-panel="blog" class="nav-pane__link">blog</a>
-        </li>
         <li data-panel="contact">
           <a href="#" data-panel="contact" class="nav-pane__link">contact</a>
         </li>
@@ -93,7 +90,86 @@
         </a>
         <p class="hero-name">尾川翔彩</p>
         <p class="hero-desc">長崎県立大学 情報システム学部情報システム学科</p>
-        <p class="hero-desc">曲や映像を作ってます。</p>
+        <p class="hero-desc">2022年から「椎野乃々」名義で作曲・映像制作を始め、自身の楽曲のMV制作を中心に活動しています。</p>
+
+        <div class="about-block">
+          <span class="view__eyebrow">profile</span>
+          <dl class="about-list">
+            <div class="about-list__row">
+              <dt>所属</dt>
+              <dd>長崎県立大学 情報システム学部情報システム学科</dd>
+            </div>
+            <div class="about-list__row">
+              <dt>趣味</dt>
+              <dd>映像制作、作曲、コラージュアート</dd>
+            </div>
+            <div class="about-list__row">
+              <dt>資格</dt>
+              <dd>
+                ITパスポート試験<br>
+                CG-ARTS「CGクリエイター検定エキスパート」<br>
+                普通自動車第一種運転免許(AT限定)
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="about-block">
+          <span class="view__eyebrow">skill</span>
+          <p class="about-links__desc">使用経験のある言語とツールです。<br>映像・デザイン制作は基本AviUtlを使用しています。</p>
+          <table class="skill-table">
+            <tr>
+              <th>プログラミング言語</th>
+              <th>ツール</th>
+            </tr>
+            <tr>
+              <td><span class="skill-icon skill-icon--web">&lt;/&gt;</span><span class="skill-label">HTML / CSS</span></td>
+              <td><img src="assets/uploads/icons/aviutl.png" alt=""><span class="skill-label">AviUtl</span></td>
+            </tr>
+            <tr>
+              <td><span class="skill-icon skill-icon--cpp">C++</span><span class="skill-label">C / C++</span></td>
+              <td><span class="skill-icon skill-icon--ai">Ai</span><span class="skill-label">Adobe Illustrator</span></td>
+            </tr>
+            <tr>
+              <td><span class="skill-icon skill-icon--js">JS</span><span class="skill-label">JavaScript</span></td>
+              <td><span class="skill-icon skill-icon--ps">Ps</span><span class="skill-label">Adobe Photoshop</span></td>
+            </tr>
+            <tr>
+              <td><span class="skill-icon skill-icon--sql">SQL</span><span class="skill-label">SQL</span></td>
+              <td><span class="skill-icon skill-icon--maya">M</span><span class="skill-label">Maya</span></td>
+            </tr>
+            <tr>
+              <td><img src="assets/uploads/icons/java.jpg" alt=""><span class="skill-label">Java</span></td>
+              <td><img src="assets/uploads/icons/blender.png" alt=""><span class="skill-label">Blender</span></td>
+            </tr>
+            <tr>
+              <td><img src="assets/uploads/icons/python.png" alt=""><span class="skill-label">Python</span></td>
+              <td><img src="assets/uploads/icons/studio_one.png" alt=""><span class="skill-label">Studio One</span></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="about-block">
+          <span class="view__eyebrow">このサイトについて</span>
+          <p class="about-links__desc">曲や映像の自主制作＆ご依頼をいただいた制作実績をまとめた、自作のポートフォリオサイトです。どうぞゆっくりとご覧ください。</p>
+
+          <div class="about-nav-cards">
+            <a href="#" data-section="original" class="about-nav-card nav-pane__link">
+              <span class="about-nav-card__icon">
+                <img src="assets/uploads/icons/original.gif" alt="Original">
+              </span>
+              <span class="about-nav-card__label">original</span>
+              <span class="about-nav-card__desc">オリジナル楽曲のMVやジャケットデザインなど、自主制作した作品です。</span>
+            </a>
+            <a href="#" data-section="works" class="about-nav-card nav-pane__link">
+              <span class="about-nav-card__icon">
+                <img src="assets/uploads/icons/works.gif" alt="Works">
+              </span>
+              <span class="about-nav-card__label">works</span>
+              <span class="about-nav-card__desc">企業様・個人様からご依頼いただいた映像・音楽・デザイン制作です。</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -101,7 +177,7 @@
     <section class="view" id="view-listening">
       <div class="view__inner">
         <a href="#" data-panel="top" class="view__back">← back</a>
-        <h2 class="listening-title">( ´ー`).｡oO（わたしを構成する音楽）</h2>
+        <h2 class="listening-title">( ´ー`).｡oO（お気に入りの制作たち）</h2>
         <div class="listening-grid" id="listeningGrid"><!-- JSで生成 --></div>
       </div>
     </section>
@@ -147,28 +223,6 @@
           <h2 class="view__title" id="worksCategoryLabel"></h2>
         </header>
         <div class="thumb-grid" id="worksCategoryGrid"><!-- JSで生成 --></div>
-      </div>
-    </section>
-
-    <!-- ===== BLOG ===== -->
-    <section class="view" id="view-blog">
-      <div class="view__inner">
-        <header class="view__head">
-          <span class="view__eyebrow">Blog - 意味があったりなかったり</span>
-          <h2 class="view__title">blog</h2>
-        </header>
-        <ul class="blog-list" id="blogList"><!-- JSで生成（新しい順） --></ul>
-      </div>
-    </section>
-
-    <!-- ===== BLOG（記事詳細。クリックした記事の内容をJSで差し込む） ===== -->
-    <section class="view" id="view-blog-detail" data-nav-group="blog">
-      <div class="view__inner">
-        <a href="#" data-panel="blog" class="view__back">← back</a>
-        <span class="view__eyebrow" id="blogDetailDate"></span>
-        <h2 class="view__title" id="blogDetailTitle"></h2>
-        <div class="view__desc" id="blogDetailBody"></div>
-        <a href="#" data-panel="blog" class="view__back view__back--bottom" id="blogDetailBackBottom">← back</a>
       </div>
     </section>
 

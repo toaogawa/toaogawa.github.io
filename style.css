@@ -383,8 +383,182 @@ button{ font-family: inherit; }
 }
 .hero-desc{
   font-size: 13px;
+  line-height: 1.8;
+  color: var(--gray);
+  max-width: 380px; /* hero-imageの幅に合わせて折り返す */
+}
+
+/* ===== TOPページ：profile / skill ブロック ===== */
+.about-block{
+  max-width: 440px;
+  margin-top: 64px;
+}
+.about-block .view__eyebrow{
+  margin-bottom: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.about-list__row{
+  display:flex;
+  gap: 20px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.about-list__row:last-child{
+  border-bottom: 1px solid var(--line);
+}
+.about-list__row dt{
+  flex-shrink: 0;
+  width: 84px;
+  color: var(--gray);
+  text-transform: lowercase;
+  letter-spacing: .03em;
+}
+.about-list__row dd{
+  margin:0;
+  color: var(--black);
+}
+.skill-table{
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  width: 100%;
+  max-width: 440px;
+}
+.skill-table th{
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .06em;
+  text-align: left;
+  color: var(--gray);
+  background: #f2f2f2;
+  border: 1px solid var(--line);
+}
+.skill-table td{
+  padding: 7px 12px;
+  font-size: 13px;
+  color: var(--black);
+  vertical-align: middle;
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+.skill-label{
+  display:inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.skill-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width: 22px;
+  height: 22px;
+  border-radius: 0;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #fff;
+  margin-right: 10px;
+  overflow: hidden; /* 画像アイコンに差し替えたとき、はみ出しをそろえるため */
+  vertical-align: middle;
+}
+/* 独自にダウンロードしたアイコン画像を使いたい場合は、
+   <span class="skill-icon ...">テキスト</span> の中身を
+   <img src="assets/uploads/icons/ファイル名.png" alt=""> に差し替えるだけでOK。
+   22×22pxの枠に自動でフィットする。 */
+.skill-icon img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* 保険:もし <img> を .skill-icon の外側に置いてしまった場合でも、
+   同じ22×22pxのサイズに強制的に揃える */
+.skill-table td img{
+  display: inline-block; /* サイト全体のimg{display:block}を打ち消し、横並びを保つ */
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.skill-icon--cpp{ background: #00599c; }
+.skill-icon--js{  background: #f0db4f; color: #222; }
+.skill-icon--web{ background: #222; font-size: 8px; }
+.skill-icon--avi{ background: #2f9e73; }
+.skill-icon--ai{  background: #ff9a00; }
+.skill-icon--ps{  background: #2fa3f7; }
+.skill-icon--sql{ background: #e38c3e; }
+.skill-icon--maya{ background: #0f8b8d; }
+.skill-icon--java{ background: #f89820; }
+.skill-icon--py{  background: #306998; }
+.skill-icon--blender{ background: #e87d0d; }
+.skill-icon--s1{ background: #2b6cb0; }
+
+.about-links__desc{
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--gray);
+  margin-bottom: 24px;
+  max-width: 440px;
+}
+.about-nav-cards{
+  display:flex;
+  gap: 20px;
+  max-width: 480px;
+}
+.about-nav-card{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  flex: 1 1 0;
+  text-align:left;
+  color: var(--black) !important;
+  text-transform: none;
+}
+.about-nav-card__icon{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  transition: none; /* ホバー時は徐々にではなく一瞬で切り替える */
+}
+.about-nav-card__icon-text{
+  color: var(--black);
+  font-weight:700;
+  font-size: 20px;
+  letter-spacing:.02em;
+}
+.about-nav-card__icon img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* 355×261pxの手描きgifを、切り取らず縮小もかけすぎず中央に収める */
+}
+.about-nav-card__label{
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: .03em;
+}
+.about-nav-card__desc{
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.6;
   color: var(--gray);
 }
+.about-nav-card:hover .about-nav-card__icon{
+  filter: brightness(0.85); /* transition なしなので、ここで即座に暗くなる */
+}
+
 .hero-links{
   display:flex;
   flex-direction:column;
@@ -447,27 +621,7 @@ button{ font-family: inherit; }
 .listening-item__thumb iframe{
   width:100%; height:100%; object-fit:cover; border:0; display:block;
 }
-.listening-item__play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
-.listening-item__play::before{
-  content:"";
-  width:34px; height:34px;
-  border-radius:50%;
-  border:1px solid var(--white);
-  opacity:0;
-  transition: opacity .2s var(--ease);
-}
-.listening-item__play::after{
-  content:"";
-  position:absolute;
-  border-style: solid;
-  border-width: 6px 0 6px 9px;
-  border-color: transparent transparent transparent var(--white);
-  opacity:0;
-  transition: opacity .2s var(--ease);
-  transform: translateX(2px);
-}
-.listening-item:hover .listening-item__play::before,
-.listening-item:hover .listening-item__play::after{ opacity:1; }
+.listening-item:hover .listening-item__thumb img{ opacity:.85; }
 .listening-item__title{
   margin-top: 8px;
   font-size: 12px;

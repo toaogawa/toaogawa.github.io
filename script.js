@@ -54,12 +54,15 @@ let otherWorks = [];
 // blogPostsのデータは data/blog.json から読み込みます（下の loadContentData() を参照）
 let blogPosts = [];
 
-// 「椎野が最近聴いている曲！」ページ（アイコンをクリックすると表示）。ちょうど4曲になるようにしてください
-const listeningSongs = [
-  { title: "さよならできなくてごめんね - Ç¢Çª", youtubeId: "RRAz-XMdJ3w" },
-  { title: "ウザ - 城戸胎生", youtubeId: "YDENY5-ZI2E" },
-  { title: "転がるくせ - 椎野乃々", youtubeId: "p0gfjEGm-Bc" },
-  { title: "もう二度と会えないといいね！- kaza", youtubeId: "BhheEkdarXI" },
+// 「お気に入りの制作」ページ（アイコンをクリックすると表示）。ちょうど4件になるようにしてください
+// type: 'original'（original内のmv/releases/design/others） または 'work'（works内のvideo/music/design/others）
+// id: それぞれのJSONファイルに書かれている id をそのまま指定する
+// focus: サムネイルは元が16:9→正方形に切り抜かれます。切り抜く位置を "left" / "center" / "right" で指定できます（省略時は center）
+const favoriteWorks = [
+  { type: "original", id: "mv-15", focus: "center" }, // やみまじょがふってきた（左上）
+  { type: "work",     id: "video-08", focus: "right" }, // あした地球がこなごなになっても（右上）
+  { type: "work",     id: "music-01", focus: "center" }, // VOID - ﾀﾄ（video版・左下）
+  { type: "work",     id: "video-04", focus: "center" }, // さよならエリクサー（右下）
 ];
 
 /* =====================================================
@@ -69,44 +72,61 @@ function byNewest(a, b){ return new Date(b.date) - new Date(a.date); }
 function formatDate(dateStr){ return dateStr.replace(/-/g, '.'); }
 
 /* =====================================================
-   LISTENING（アイコンをクリックした時のページ）
-   サムネイルをクリックすると、その場で動画に差し替わって再生できます
+   お気に入りの制作（アイコンをクリックした時のページ）
+   サムネイルをクリックすると、その作品の詳細ページに移動します
    ===================================================== */
+function getFavoriteThumb(item){
+  if(item.youtubeId) return `https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`;
+  if(item.thumbnail) return item.thumbnail;
+  return '';
+}
+
+const focusPositionMap = { left: '0% 50%', center: '50% 50%', right: '100% 50%' };
+
 function renderListening(){
   const grid = document.getElementById('listeningGrid');
   if(!grid) return;
 
-  const renderItem = (song, i) => {
+  // まだデータが読み込まれていない場合は、データが揃ってから改めて呼ばれる
+  if(mvWorks.length === 0 && otherWorks.length === 0) return;
+
+  const resolved = favoriteWorks.map(ref => {
+    const list = ref.type === 'original' ? mvWorks : otherWorks;
+    const item = list.find(w => w.id === ref.id);
+    return item ? { ...ref, title: item.title, thumb: getFavoriteThumb(item) } : null;
+  }).filter(Boolean);
+
+  const renderItem = (fav, i) => {
     const isSmall = (i === 1 || i === 2); // 2番目・3番目は小さいサイズ（縦型スマホのときだけ効く）
+    const objectPosition = focusPositionMap[fav.focus] || focusPositionMap.center;
     return `
     <div class="listening-item${isSmall ? ' listening-item--small' : ''}" data-index="${i}">
       <div class="listening-item__thumb">
-        <img src="https://img.youtube.com/vi/${song.youtubeId}/maxresdefault.jpg" alt="${song.title}" loading="lazy">
-        <span class="listening-item__play"></span>
+        <img src="${fav.thumb}" alt="${fav.title}" loading="lazy" style="object-position:${objectPosition}" onerror="this.remove()">
       </div>
-      <p class="listening-item__title">${song.title}</p>
+      <p class="listening-item__title">${fav.title}</p>
     </div>`;
   };
 
   // 4つ丸ごとの「格子」ではなく、上段・下段それぞれの中で2つが隙間なく並ぶ形にする
   grid.innerHTML = `
     <div class="listening-row">
-      ${renderItem(listeningSongs[0], 0)}
-      ${renderItem(listeningSongs[1], 1)}
+      ${resolved[0] ? renderItem(resolved[0], 0) : ''}
+      ${resolved[1] ? renderItem(resolved[1], 1) : ''}
     </div>
     <div class="listening-row">
-      ${renderItem(listeningSongs[2], 2)}
-      ${renderItem(listeningSongs[3], 3)}
+      ${resolved[2] ? renderItem(resolved[2], 2) : ''}
+      ${resolved[3] ? renderItem(resolved[3], 3) : ''}
     </div>
   `;
 
   grid.querySelectorAll('.listening-item').forEach(item => {
     item.addEventListener('click', () => {
-      const song = listeningSongs[item.dataset.index];
-      if(!song) return;
-      const thumb = item.querySelector('.listening-item__thumb');
-      thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${song.youtubeId}?autoplay=1" title="${song.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-    }, { once: true });
+      const fav = resolved[item.dataset.index];
+      if(!fav) return;
+      if(fav.type === 'original') openOriginalDetail(fav.id);
+      else openWorkDetail(fav.id);
+    });
   });
 }
 
@@ -764,6 +784,7 @@ async function loadContentData(){
     ];
     mvWorks = [...mv, ...releases, ...originalDesign, ...originalOthers];
     renderBlog('blogList'); // ブログのデータが揃ってから一覧を描画する
+    renderListening(); // お気に入りの制作も、データが揃ってから改めて描画する
     if(location.pathname !== '/' && location.pathname !== '') applyRouteFromPath(); // /mv/xxx のようなURLで直接アクセスされた場合、そのページを開く
   }catch(err){
     console.error('コンテンツデータの読み込みに失敗しました', err);
@@ -1072,7 +1093,7 @@ function initNavScrollbar(){
     positionTrack();
 
     const activeView = document.querySelector('.view.is-active');
-    const hiddenOn = ['view-top', 'view-contact'];
+    const hiddenOn = ['view-contact'];
     const scrollable = viewPane.scrollHeight > viewPane.clientHeight + 2;
     const shouldShow = scrollable && !(activeView && hiddenOn.includes(activeView.id));
 
